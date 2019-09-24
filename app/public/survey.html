@@ -1,11 +1,201 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="app/public/style.css">
     <title>Survey Page</title>
 </head>
+
 <body>
-    <h1>Survey Page!</h1>
+    <h1>Survey Questions</h1>
+
+    <form class="container col-sm-6">
+
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Name</label>
+            <input type="name" class="form-control" id="nameInput" placeholder="i.e. Jon Alden">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Image URL</label>
+            <input type="text" class="form-control" id="photoInput" placeholder="https://www.jonalden.jpg">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Empire Strikes Back is the best Star Wars Movie</label>
+            <select multiple class="form-control" id="question1">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">Han shot first</label>
+            <select multiple class="form-control" id="question2">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect3">All of the CG added to the original movies is horrible</label>
+            <select multiple class="form-control" id="question3">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect4">The Last Jedi is a pretty good movie</label>
+            <select multiple class="form-control" id="question4">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect5">Mark Hamill is a very good actor</label>
+            <select multiple class="form-control" id="question5">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect6">I am incredibly excited for the upcoming Star Wars movie</label>
+            <select multiple class="form-control" id="question6">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect7">Tie Fighters are the coolest spaceships in any movie</label>
+            <select multiple class="form-control" id="question7">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect8">Star Wars really needs more sandy planets</label>
+            <select multiple class="form-control" id="question8">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect9">Hans death was enough to put a tear in my eye</label>
+            <select multiple class="form-control" id="question9">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect10">Star Wars is better then The Lord of the Rings</label>
+            <select multiple class="form-control" id="question10">
+                <option>1 </option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5 </option>
+            </select>
+        </div>
+
+        <button type="submit" value="submit" class="btn btn-info" id="button">Find a friend!</button>
+    </form>
+
+    <div class="modal" tabindex="-1" role="dialog" id="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Your new best friend! </h5>
+                </div>
+                <div id="modalContent" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeBtn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
+<Script>
+
+    // const closestFriend = require("../public/routing/apiroutes")
+
+    const modal = function (res) {
+        document.getElementById("modalContent").innerHTML = JSON.stringify(res);
+        document.getElementById("modal").style.display = "block";
+        document.getElementById("closeBtn").addEventListener("click", function () {
+            document.getElementById("modal").style.display = "none";
+        })
+    }
+
+    document.getElementById("button").addEventListener("click", function () {
+        event.preventDefault();
+        let newFriend = {
+            name: document.getElementById("nameInput").value.trim(),
+            photo: document.getElementById("photoInput").value.trim(),
+            scores:
+                [
+                    parseInt(document.getElementById("question1").value.trim()),
+                    parseInt(document.getElementById("question2").value.trim()),
+                    parseInt(document.getElementById("question3").value.trim()),
+                    parseInt(document.getElementById("question4").value.trim()),
+                    parseInt(document.getElementById("question5").value.trim()),
+                    parseInt(document.getElementById("question6").value.trim()),
+                    parseInt(document.getElementById("question7").value.trim()),
+                    parseInt(document.getElementById("question8").value.trim()),
+                    parseInt(document.getElementById("question9").value.trim()),
+                    parseInt(document.getElementById("question10").value.trim())
+                ]
+
+        }
+        fetch("/api/friends", {
+            method: "POST",
+            body: JSON.stringify(newFriend),
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => res.json())
+            .then(function (res) {
+                modal(res);
+            });
+    })
+</Script>
+
 </html>
