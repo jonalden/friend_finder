@@ -1,15 +1,24 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="app/public/style.css">
     <title>Home Page</title>
 </head>
-<body>
-    <h1>Take the survey</h1>
 
-    <form action="/survey">
-        <input type="submit" value="Go to survey" />
+<body style="background: darkcyan">
+    <div id="homeContent">
+        <h1 style="text-align: center; margin: 10% auto 0; color: white; font-size: 50px">STAR WARS BUDDY FINDER</h1>
+        <p style="text-align: center; margin: 2% 20% 5%; color: white; font-size: 30px"> Click the button and take the survey to find out who your new best bud will be.
+            You are absolutely required to hang out with this person and make wookie sounds,
+            lightsaber duel, and try to use the force on your laptop. </p>
+    </div>
+
+    <form style="text-align: center" action="/survey">
+        <input style="color: white; background: cornflowerblue; height: 60px; width: 200px; font-size: 20px; border-radius: 10px" type="submit" value="Go to survey" />
     </form>
 </body>
+
 </html>

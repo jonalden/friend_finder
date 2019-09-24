@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="app/public/style.css">
+    <link rel="stylesheet" href="app/public/CSS/style.css">
     <title>Survey Page</title>
 </head>
 
-<body>
-    <h1>Survey Questions</h1>
+<body style="background: darkcyan">
+    <h1 style="text-align: center; margin: 20 auto 70; color: white">Share your Star Wars thoughts to see who your new soulmate will be</h1>
 
     <form class="container col-sm-6">
 
@@ -135,7 +135,7 @@
             </select>
         </div>
 
-        <button type="submit" value="submit" class="btn btn-info" id="button">Find a friend!</button>
+        <button style="color: white; background: cornflowerblue; height: 60px; width: 200px; font-size: 20px; border-radius: 10px; margin: 4% 0" type="submit" value="submit" class="btn btn-info" id="button">Find a friend!</button>
     </form>
 
     <div class="modal" tabindex="-1" role="dialog" id="modal">
@@ -146,12 +146,17 @@
                 </div>
                 <div id="modalContent" class="modal-body">
                 </div>
+                <h2 id="modalName"></h2>
+                <img id="modalPhoto" src="" alt="ninja squirrel Jon" height="300" width="300">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="closeBtn" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+<div style="width: 100%; height: 10%; background: white">
+    <a href="/api/friends" style="color: darkcyan; position: relative; left: 70%; top: 20px ">See other friends</a>
+</div>
 
 </body>
 <Script>
@@ -159,7 +164,8 @@
     // const closestFriend = require("../public/routing/apiroutes")
 
     const modal = function (res) {
-        document.getElementById("modalContent").innerHTML = JSON.stringify(res);
+        document.getElementById("modalName").innerHTML = res.name;
+        document.getElementById("modalPhoto").setAttribute("src", res.photo);
         document.getElementById("modal").style.display = "block";
         document.getElementById("closeBtn").addEventListener("click", function () {
             document.getElementById("modal").style.display = "none";
@@ -168,6 +174,23 @@
 
     document.getElementById("button").addEventListener("click", function () {
         event.preventDefault();
+
+        if (document.getElementById("nameInput").value === "" ||
+            document.getElementById("photoInput").value === "" ||
+            document.getElementById("question1").value === "" ||
+            document.getElementById("question1").value === "" ||
+            document.getElementById("question1").value === "" ||
+            document.getElementById("question1").value === "" ||
+            document.getElementById("question1").value === "" ||
+            document.getElementById("question1").value === "" ||
+            document.getElementById("question1").value === "" ||
+            document.getElementById("question1").value === "" ||
+            document.getElementById("question1").value === "" ||
+            document.getElementById("question1").value === "") {
+            alert("all forms must be filled");
+            return false;
+        }
+
         let newFriend = {
             name: document.getElementById("nameInput").value.trim(),
             photo: document.getElementById("photoInput").value.trim(),
